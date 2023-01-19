@@ -10,14 +10,22 @@
 {{-- Form - Create --}}
 <section class="container" >
 
-    {{-- l'attributo name="" e' obbligatorio e sara' compilato con il nome della rispettiva colonna del database, senza il name accoppiato l'informazione non verra' mandata --}}
+    {{-- l'attributo NAME (name="") e' obbligatorio e sara' compilato con il nome della rispettiva colonna del database, senza il name accoppiato l'informazione non verra' mandata --}}
 
-    {{--l'attributo type fa riferimento al tipo di dato (text,string,id,smallInt ecc...)  --}}
-    <form method="" action="">
+    {{--l'attributo TYPE (type="") fa riferimento al tipo di dato (text,string,id,smallInt ecc...)  --}}
+
+    {{-- quando l'utente clicca sul bottone, l'ACTION (action="") e' quella di "storare" l'informazione nel database con store, verra' quindi reindirizzato alla pagina store --}}
+
+    <form method="POST" action="{{route("comics.store")}}">
+
+        @csrf
+
+        {{-- @csrf crea un input di tipo hidden che invia un token che genera un informazione che viene inviata al server per protezione ed e' OBBLIGATORIO --}}
+
         {{-- title --}}
         <div class="mb-3">
           <label class="form-label">Title</label>
-          <input name="title" type="text" class="form-control" id="title">
+          <input name="title" type="string" class="form-control" id="title">
         </div>
         {{-- description --}}
         <div class="mb-3">

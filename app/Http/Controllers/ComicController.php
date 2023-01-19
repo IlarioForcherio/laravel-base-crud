@@ -41,7 +41,26 @@ class ComicController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+       //$data = Request::All();
+
+       $data = $request->all();
+       //con il metodo all() ripulisce l'array risultante da tutte le informazioni aggiuntive
+
+       // si crea un istanza della classe Request
+
+       $new_comic = new Comic();
+       $new_comic->title = $data['title'];
+       $new_comic->description = $data['description'];
+       $new_comic->thumb = $data['thumb'];
+       $new_comic->price = $data['price'];
+       $new_comic->series = $data['series'];
+       $new_comic->sale_date = $data['sale_date'];
+       $new_comic->type = $data['type'];
+      //senza save non si salvano i dati nel database
+       $new_comic->save();
+       //visto che la pagina di store e' una pagina di intermezzo e non va bene per l'atterraggio, si reindirizza l'utente su una pagina piu' consona
+       return redirect()->route('comics.index');
     }
 
     /**

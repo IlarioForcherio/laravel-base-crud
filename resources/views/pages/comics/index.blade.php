@@ -5,11 +5,7 @@
 
 @section('main')
 <h2>Lista dei comics</h2>
-{{-- bottone per la creazione di un Comic --}}
 
-<button type="button" class="btn btn-primary">
-    <a href="{{route('comics.create')}}">Aggiungi un Comic</a>
-</button>
 
 
 
@@ -27,5 +23,11 @@
     @endforeach
 </div>
 
+
+{{-- bottone per la creazione di un Comic --}}
+
+<button type="button" class="btn btn-primary">
+    <a href="{{route('comics.create')}}">Aggiungi un Comic</a>
+</button>
 
 @endsection
