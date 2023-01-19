@@ -25,5 +25,8 @@ Route::resource('/comics' , 'ComicController' );
 //chiedere perche' non funziona con questa sintassi
 
 
+// per vedere le rotte:  php artisan route:list
+
+
 
 

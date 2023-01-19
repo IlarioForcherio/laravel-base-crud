@@ -15,7 +15,10 @@ class ComicController extends Controller
      */
     public function index(){
 
+        // attribuisco a $comics il valore di tutta la tabella del modello Comic
         $comics = Comic::all();
+
+
 
         return view('pages.comics.index', compact('comics'));
     }
@@ -27,7 +30,7 @@ class ComicController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.comics.create');
     }
 
     /**
@@ -49,7 +52,10 @@ class ComicController extends Controller
      */
     public function show($id)
     {
-        //
+        //con la funzione find or fail recupera l'id
+        $single_comic = Comic::findOrfail($id);
+
+        return view("pages.comics.show", compact('single_comic') );
     }
 
     /**

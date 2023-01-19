@@ -13,6 +13,7 @@ class CreateComicsTable extends Migration
      */
     public function up()
     {
+        // popolo la tabella associata al modello Comic costruendo le sue colonne
         Schema::create('comics', function (Blueprint $table) {
             $table->id();
             $table->string('title',100);
@@ -22,8 +23,11 @@ class CreateComicsTable extends Migration
             $table->string('series');
             $table->string('sale_date');
             $table->string('type');
+            // timestamps va sempre alla fine
             $table->timestamps();
         });
+
+        //comando per creare a tutti gli effetti le colonne:  php artisan migrate
     }
 
     /**
