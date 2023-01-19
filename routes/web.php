@@ -16,8 +16,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/',"PagesController@index")->name('home');
 
+
 //cosi creo la rotta che reindirizza al controller ComicController che e' quello della crud (resource)
 //con :: class gli passo tutti i return delle funzioni che sono dentro a ComicController
-Route::resource('/comics' , ComicController::class );
+Route::resource('/comics' , 'ComicController' );
+
+//Route::resource('/comics' , ComicController::class );
+//chiedere perche' non funziona con questa sintassi
+
+
 
 
