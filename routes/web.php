@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ComicController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/',"PagesController@index")->name('home');
+
+//cosi creo la rotta che reindirizza al controller ComicController che e' quello della crud (resource)
+//con :: class gli passo tutti i return delle funzioni che sono dentro a ComicController
+Route::resource('/comics' , ComicController::class );
+
+

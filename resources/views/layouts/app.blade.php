@@ -12,8 +12,8 @@
 <header>
     @include('components.header')
 </header>
-<main>
-main
+<main class="container" >
+@yield('main')
 </main>
 <footer>
     @include('components.footer')
