@@ -28,6 +28,8 @@ class CreateComicsTable extends Migration
         });
 
         //comando per creare a tutti gli effetti le colonne:  php artisan migrate
+
+        //correzioni: type price:decimal/float  type sale date:date
     }
 
     /**

@@ -15,9 +15,16 @@ class ComicController extends Controller
      */
     public function index(){
 
-        // attribuisco a $comics il valore di tutta la tabella del modello Comic
+        // attribuisco a $comics il valore di tutta la tabella del modello Comic, tutti i valori del record
         $comics = Comic::all();
 
+
+
+        //$comics = Comic::paginate(4); con paginate crea un impaginazione su piu' pagine
+
+        //al fondo della sezione che voglio impaginare metto:
+        //{{$comics->links()}}
+        //questo va scritto nella pagina della view (in qiesto caso 'pages.comics.index')
 
 
         return view('pages.comics.index', compact('comics'));
@@ -60,7 +67,7 @@ class ComicController extends Controller
       //senza save non si salvano i dati nel database
        $new_comic->save();
        //visto che la pagina di store e' una pagina di intermezzo e non va bene per l'atterraggio, si reindirizza l'utente su una pagina piu' consona
-       return redirect()->route('comics.index');
+       return redirect()->route('pages.comics.index');
     }
 
     /**
@@ -84,8 +91,9 @@ class ComicController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-        //
+    {   //modifica di un elemento e manda le modifiche a update
+        $comics = Comic::findOrFail($id);
+        return view('pages.comics.edit', compact('comics'));
     }
 
     /**
@@ -97,7 +105,11 @@ class ComicController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $comics = Comic::findOrFail($id);
+        $comics->update($data);
+        return redirect()->route('pages.comics.show', $comics->id)->with("success, Modifiche effettuate con successo:$comics->title");
+
     }
 
     /**
@@ -107,7 +119,9 @@ class ComicController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
-        //
+    {   //cancellazione di un elemento
+        $comics = Comic::findOrFail($id);
+        $comics->delete();
+        return redirect()->route('pages.comics.index')->with('success', "elemento cancellato con successo:$comics->title" );
     }
 }
