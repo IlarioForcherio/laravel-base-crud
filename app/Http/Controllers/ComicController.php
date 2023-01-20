@@ -16,7 +16,7 @@ class ComicController extends Controller
     public function index(){
 
         // attribuisco a $comics il valore di tutta la tabella del modello Comic, tutti i valori del record
-        $comics = Comic::all();
+        $comics_index = Comic::all();
 
 
 
@@ -27,7 +27,7 @@ class ComicController extends Controller
         //questo va scritto nella pagina della view (in qiesto caso 'pages.comics.index')
 
 
-        return view('pages.comics.index', compact('comics'));
+        return view('pages.comics.index', compact('comics_index'));
     }
 
     /**
@@ -57,17 +57,20 @@ class ComicController extends Controller
        // si crea un istanza della classe Request
 
        $new_comic = new Comic();
-       $new_comic->title = $data['title'];
-       $new_comic->description = $data['description'];
-       $new_comic->thumb = $data['thumb'];
-       $new_comic->price = $data['price'];
-       $new_comic->series = $data['series'];
-       $new_comic->sale_date = $data['sale_date'];
-       $new_comic->type = $data['type'];
+
+       $new_comic ->fill($data);
+
+      // $new_comic->title = $data['title'];
+      // $new_comic->description = $data['description'];
+      // $new_comic->thumb = $data['thumb'];
+      // $new_comic->price = $data['price'];
+      // $new_comic->series = $data['series'];
+      // $new_comic->sale_date = $data['sale_date'];
+      // $new_comic->type = $data['type'];
       //senza save non si salvano i dati nel database
        $new_comic->save();
        //visto che la pagina di store e' una pagina di intermezzo e non va bene per l'atterraggio, si reindirizza l'utente su una pagina piu' consona
-       return redirect()->route('pages.comics.index');
+       return redirect()->route('comics.index');
     }
 
     /**
@@ -92,8 +95,8 @@ class ComicController extends Controller
      */
     public function edit($id)
     {   //modifica di un elemento e manda le modifiche a update
-        $comics = Comic::findOrFail($id);
-        return view('pages.comics.edit', compact('comics'));
+        $comics_to_edit = Comic::findOrFail($id);
+        return view('pages.comics.edit', compact('comics_to_edit'));
     }
 
     /**
@@ -104,11 +107,11 @@ class ComicController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
+    {   //prende i dati da edit
         $data = $request->all();
-        $comics = Comic::findOrFail($id);
-        $comics->update($data);
-        return redirect()->route('pages.comics.show', $comics->id)->with("success, Modifiche effettuate con successo:$comics->title");
+        $comics_update = Comic::findOrFail($id);
+        $comics_update->update($data);
+        return redirect()->route('comics.show', $comics_update->id)->with("success, Modifiche effettuate con successo:$comics_update->title");
 
     }
 
@@ -122,6 +125,6 @@ class ComicController extends Controller
     {   //cancellazione di un elemento
         $comics = Comic::findOrFail($id);
         $comics->delete();
-        return redirect()->route('pages.comics.index')->with('success', "elemento cancellato con successo:$comics->title" );
+        return redirect()->route('comics.index')->with('success', "elemento cancellato con successo:$comics->title" );
     }
 }

@@ -1,5 +1,3 @@
-
-
 @extends('layouts.app')
 
 @section('title','Form - Single Comic')
@@ -8,7 +6,7 @@
 <h1 class="text-center">Form per la Create</h1>
 
 {{-- Form - Create --}}
-<section class="container" >
+<section class="container">
 
     {{-- l'attributo NAME (name="") e' obbligatorio e sara' compilato con il nome della rispettiva colonna del database, senza il name accoppiato l'informazione non verra' mandata --}}
 
@@ -31,7 +29,7 @@
         <div class="mb-3">
             <label class="form-label">Description</label>
             <textarea name="description" type="text" id="" cols="50" rows="3"></textarea>
-          </div>
+        </div>
           {{-- thumb --}}
           <div class="mb-3">
             <label class="form-label">Image</label>

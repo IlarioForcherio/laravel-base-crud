@@ -21,7 +21,7 @@
 
 
 <div class="d-flex  flex-wrap container">
-    @foreach ($comics as $elem )
+    @foreach ($comics_index as $elem )
     <div class="card-container">
      <div class="comic-card">
         <img src="{{$elem->thumb}}" alt="">
